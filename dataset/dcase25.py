@@ -9,12 +9,7 @@ from sklearn.preprocessing import LabelEncoder
 from typing import Optional, List
 
 
-import socket
-hostname = socket.gethostname()
-dataset_dir = "/opt/datasets/dcase_task1/TAU-urban-acoustic-scenes-2022-mobile-development" if "rk" in socket.gethostname() \
-    else "/share/opt/datasets/dcase_task1/TAU-urban-acoustic-scenes-2022-mobile-development"
-
-# dataset_dir = None
+dataset_dir = None
 assert dataset_dir, "Specify 'TAU Urban Acoustic Scenes 2022 Mobile' dataset location in 'dataset_dir'. Download from: https://zenodo.org/record/6337421"
 
 # Dataset configuration
