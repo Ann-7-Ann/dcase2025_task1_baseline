@@ -215,7 +215,7 @@ class PLModule(pl.LightningModule):
         x = x.half()
 
         y_hat = self.multi_device_model(x, devices)
-        samples_loss = F.cross_entropy(y_hat, labels)
+        samples_loss = F.cross_entropy(y_hat, labels, reduction="none")
 
         _, preds = torch.max(y_hat, dim=1)
         n_correct_per_sample = (preds == labels)
