@@ -1,0 +1,17 @@
+Loading `train_dataloader` to estimate number of stepping batches.
+C:\Users\annas\anaconda3\Lib\site-packages\pytorch_lightning\trainer\connectors\data_connector.py:420: Consider setting `persistent_workers=True` in 'train_dataloader' to speed up the dataloader worker initialization.
+
+  | Name        | Type       | Params | Mode
+---------------------------------------------------
+0 | mel         | Sequential | 0      | train
+1 | mel_augment | Sequential | 0      | train
+2 | model       | Network    | 83.7 K | train
+---------------------------------------------------
+83.7 K    Trainable params
+0         Non-trainable params
+83.7 K    Total params
+0.335     Total estimated model params size (MB)
+118       Modules in train mode
+0         Modules in eval mode
+Epoch 0:   1%|▍                                                                   | 1/137 [02:39<6:01:08,  0.01it/s, v_num=rwts]
+C:\Users\annas\anaconda3\Lib\site-packages\pytorch_lightning\trainer\connectors\data_connector.py:420: Consider setting `persistent_workers=True` in 'val_dataloader' to speed up the dataloader worker initialization.

@@ -1,0 +1,109 @@
+_wandb:
+    value:
+        cli_version: 0.19.8
+        m:
+            - "1": trainer/global_step
+              "6":
+                - 3
+              "7": []
+        python_version: 3.12.7
+        t:
+            "1":
+                - 1
+                - 5
+                - 9
+                - 11
+                - 41
+                - 49
+                - 53
+                - 55
+                - 103
+            "2":
+                - 1
+                - 5
+                - 9
+                - 11
+                - 41
+                - 49
+                - 53
+                - 55
+                - 103
+            "3":
+                - 7
+                - 13
+                - 15
+                - 16
+                - 19
+                - 23
+                - 55
+                - 66
+            "4": 3.12.7
+            "5": 0.19.8
+            "6": 4.50.0
+            "8":
+                - 3
+                - 5
+            "12": 0.19.8
+            "13": windows-amd64
+MACs:
+    value: 29419156
+Parameters_Bytes:
+    value: 244592
+base_channels:
+    value: 32
+batch_size:
+    value: 256
+channels_multiplier:
+    value: 1.8
+check_val_every_n_epoch:
+    value: 10
+expansion_rate:
+    value: 2.1
+experiment_name:
+    value: Baseline_general
+f_max:
+    value: null
+f_min:
+    value: 0
+freqm:
+    value: 48
+hop_length:
+    value: 500
+in_channels:
+    value: 1
+lr:
+    value: 0.005
+mixstyle_alpha:
+    value: 0.3
+mixstyle_p:
+    value: 0.4
+n_classes:
+    value: 10
+n_epochs:
+    value: 150
+n_fft:
+    value: 4096
+n_mels:
+    value: 256
+num_workers:
+    value: 8
+orig_sample_rate:
+    value: 44100
+precision:
+    value: "32"
+project_name:
+    value: DCASE25_Task1
+roll_sec:
+    value: 0.1
+sample_rate:
+    value: 32000
+subset:
+    value: 25
+timem:
+    value: 0
+warmup_steps:
+    value: 2000
+weight_decay:
+    value: 0.0001
+window_length:
+    value: 3072

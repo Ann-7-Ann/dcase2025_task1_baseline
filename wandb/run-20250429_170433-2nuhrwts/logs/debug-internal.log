@@ -1,0 +1,6 @@
+{"time":"2025-04-29T17:04:33.7440466+02:00","level":"INFO","msg":"stream: starting","core version":"0.19.8","symlink path":"wandb\\run-20250429_170433-2nuhrwts\\logs\\debug-core.log"}
+{"time":"2025-04-29T17:04:33.8549696+02:00","level":"INFO","msg":"created new stream","id":"2nuhrwts"}
+{"time":"2025-04-29T17:04:33.8556103+02:00","level":"INFO","msg":"stream: started","id":"2nuhrwts"}
+{"time":"2025-04-29T17:04:33.8556103+02:00","level":"INFO","msg":"handler: started","stream_id":"2nuhrwts"}
+{"time":"2025-04-29T17:04:33.8556103+02:00","level":"INFO","msg":"sender: started","stream_id":"2nuhrwts"}
+{"time":"2025-04-29T17:04:33.8556103+02:00","level":"INFO","msg":"writer: Do: started","stream_id":"2nuhrwts"}

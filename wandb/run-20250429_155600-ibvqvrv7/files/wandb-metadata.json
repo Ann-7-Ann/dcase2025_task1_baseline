@@ -1,0 +1,31 @@
+{
+  "os":  "Windows-11-10.0.26100-SP0",
+  "python":  "CPython 3.12.7",
+  "startedAt":  "2025-04-29T13:56:00.546879Z",
+  "program":  "c:\\Users\\annas\\Desktop\\audio_challange\\baseline\\dcase2025_task1_baseline-1\\train_base.py",
+  "codePath":  "train_base.py",
+  "git":  {
+    "remote":  "https://github.com/Ann-7-Ann/dcase2025_task1_baseline.git",
+    "commit":  "87a5f8c4957b00055f83f6f69af8c52b1a3bb405"
+  },
+  "email":  "247105@edu.p.lodz.pl",
+  "root":  ".",
+  "host":  "my-ASUS",
+  "executable":  "C:\\Users\\annas\\anaconda3\\python.exe",
+  "codePathLocal":  "train_base.py",
+  "cpu_count":  8,
+  "cpu_count_logical":  16,
+  "disk":  {
+    "/":  {
+      "total":  "998695235584",
+      "used":  "256169959424"
+    }
+  },
+  "memory":  {
+    "total":  "25125797888"
+  },
+  "cpu":  {
+    "count":  8,
+    "countLogical":  16
+  }
+}

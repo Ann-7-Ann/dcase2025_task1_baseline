@@ -1,0 +1,96 @@
+Loading `train_dataloader` to estimate number of stepping batches.
+C:\Users\annas\anaconda3\Lib\site-packages\pytorch_lightning\trainer\connectors\data_connector.py:420: Consider setting `persistent_workers=True` in 'train_dataloader' to speed up the dataloader worker initialization.
+
+  | Name        | Type       | Params | Mode
+---------------------------------------------------
+0 | mel         | Sequential | 0      | train
+1 | mel_augment | Sequential | 0      | train
+2 | model       | Network    | 74.1 K | train
+---------------------------------------------------
+74.1 K    Trainable params
+0         Non-trainable params
+74.1 K    Total params
+0.296     Total estimated model params size (MB)
+106       Modules in train mode
+0         Modules in eval mode
+Sanity Checking DataLoader 0:   0%|                                                                       | 0/2 [00:00<?, ?it/s]
+C:\Users\annas\anaconda3\Lib\site-packages\pytorch_lightning\trainer\connectors\data_connector.py:420: Consider setting `persistent_workers=True` in 'val_dataloader' to speed up the dataloader worker initialization.
+Traceback (most recent call last):
+  File "c:\Users\annas\Desktop\audio_challange\baseline\dcase2025_task1_baseline-1\train_base.py", line 457, in <module>
+    train(args)
+  File "c:\Users\annas\Desktop\audio_challange\baseline\dcase2025_task1_baseline-1\train_base.py", line 403, in train
+    trainer.fit(pl_module, train_dl, test_dl)
+  File "C:\Users\annas\anaconda3\Lib\site-packages\pytorch_lightning\trainer\trainer.py", line 561, in fit
+    call._call_and_handle_interrupt(
+  File "C:\Users\annas\anaconda3\Lib\site-packages\pytorch_lightning\trainer\call.py", line 48, in _call_and_handle_interrupt
+    return trainer_fn(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\annas\anaconda3\Lib\site-packages\pytorch_lightning\trainer\trainer.py", line 599, in _fit_impl
+    self._run(model, ckpt_path=ckpt_path)
+  File "C:\Users\annas\anaconda3\Lib\site-packages\pytorch_lightning\trainer\trainer.py", line 1012, in _run
+    results = self._run_stage()
+              ^^^^^^^^^^^^^^^^^
+  File "C:\Users\annas\anaconda3\Lib\site-packages\pytorch_lightning\trainer\trainer.py", line 1054, in _run_stage
+    self._run_sanity_check()
+  File "C:\Users\annas\anaconda3\Lib\site-packages\pytorch_lightning\trainer\trainer.py", line 1083, in _run_sanity_check
+    val_loop.run()
+  File "C:\Users\annas\anaconda3\Lib\site-packages\pytorch_lightning\loops\utilities.py", line 179, in _decorator
+    return loop_run(self, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\annas\anaconda3\Lib\site-packages\pytorch_lightning\loops\evaluation_loop.py", line 145, in run
+    self._evaluation_step(batch, batch_idx, dataloader_idx, dataloader_iter)
+  File "C:\Users\annas\anaconda3\Lib\site-packages\pytorch_lightning\loops\evaluation_loop.py", line 437, in _evaluation_step
+    output = call._call_strategy_hook(trainer, hook_name, *step_args)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\annas\anaconda3\Lib\site-packages\pytorch_lightning\trainer\call.py", line 328, in _call_strategy_hook
+    output = fn(*args, **kwargs)
+             ^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\annas\anaconda3\Lib\site-packages\pytorch_lightning\strategies\strategy.py", line 412, in validation_step
+    return self.lightning_module.validation_step(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\Users\annas\Desktop\audio_challange\baseline\dcase2025_task1_baseline-1\train_base.py", line 144, in validation_step
+    y_hat = self.forward(x, devices)
+            ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\Users\annas\Desktop\audio_challange\baseline\dcase2025_task1_baseline-1\train_base.py", line 93, in forward
+    x = self.model(x, devices)
+        ^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\annas\anaconda3\Lib\site-packages\torch\nn\modules\module.py", line 1739, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\annas\anaconda3\Lib\site-packages\torch\nn\modules\module.py", line 1750, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\Users\annas\Desktop\audio_challange\baseline\dcase2025_task1_baseline-1\models\net.py", line 273, in forward
+    x = self._forward_conv(x, device_id)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\Users\annas\Desktop\audio_challange\baseline\dcase2025_task1_baseline-1\models\net.py", line 269, in _forward_conv
+    x = self.stages(x, device_id)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\annas\anaconda3\Lib\site-packages\torch\nn\modules\module.py", line 1739, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\annas\anaconda3\Lib\site-packages\torch\nn\modules\module.py", line 1750, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\Users\annas\Desktop\audio_challange\baseline\dcase2025_task1_baseline-1\models\net.py", line 84, in forward
+    x = module(x, device_id)
+        ^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\annas\anaconda3\Lib\site-packages\torch\nn\modules\module.py", line 1739, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\annas\anaconda3\Lib\site-packages\torch\nn\modules\module.py", line 1750, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\Users\annas\Desktop\audio_challange\baseline\dcase2025_task1_baseline-1\models\net.py", line 84, in forward
+    x = module(x, device_id)
+        ^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\annas\anaconda3\Lib\site-packages\torch\nn\modules\module.py", line 1739, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\annas\anaconda3\Lib\site-packages\torch\nn\modules\module.py", line 1750, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\Users\annas\Desktop\audio_challange\baseline\dcase2025_task1_baseline-1\models\net.py", line 151, in forward
+    out = out + x
+          ~~~~^~~
+RuntimeError: The size of tensor a (8) must match the size of tensor b (15) at non-singleton dimension 3

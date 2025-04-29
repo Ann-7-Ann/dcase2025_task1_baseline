@@ -9,7 +9,8 @@ from sklearn.preprocessing import LabelEncoder
 from typing import Optional, List
 
 
-dataset_dir = None
+dataset_dir = "C:\\Users\\annas\\Desktop\\audio_challange\\TAU\\development_set\\TAU-urban-acoustic-scenes-2022-mobile-development"
+
 assert dataset_dir, "Specify 'TAU Urban Acoustic Scenes 2022 Mobile' dataset location in 'dataset_dir'. Download from: https://zenodo.org/record/6337421"
 
 # Dataset configuration

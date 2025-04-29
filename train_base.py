@@ -50,7 +50,8 @@ class PLModule(pl.LightningModule):
             in_channels=config.in_channels,
             base_channels=config.base_channels,
             channels_multiplier=config.channels_multiplier,
-            expansion_rate=config.expansion_rate
+            expansion_rate=config.expansion_rate,
+            num_devices = config.num_devices
         )
 
         # -------- Device/Label Definitions --------
@@ -83,13 +84,13 @@ class PLModule(pl.LightningModule):
         x = (x + 1e-5).log()
         return x
 
-    def forward(self, x):
+    def forward(self, x, devices):
         """
         :param x: batch of raw audio signals (waveforms)
         :return: final model predictions
         """
         x = self.mel_forward(x)
-        x = self.model(x)
+        x = self.model(x, devices)
         return x
 
     def configure_optimizers(self):
@@ -117,13 +118,13 @@ class PLModule(pl.LightningModule):
         :param batch_idx
         :return: loss to update model parameters
         """
-        x, _, labels, _, _ = train_batch
+        x, _, labels, devices, _ = train_batch
         x = self.mel_forward(x)  # we convert the raw audio signals into log mel spectrograms
 
         if self.config.mixstyle_p > 0:
             # frequency mixstyle
             x = mixstyle(x, self.config.mixstyle_p, self.config.mixstyle_alpha)
-        y_hat = self.model(x)
+        y_hat = self.model(x, devices)
         loss = F.cross_entropy(y_hat, labels)
 
         # Log learning rate and epoch
@@ -140,7 +141,7 @@ class PLModule(pl.LightningModule):
 
     def validation_step(self, val_batch, batch_idx):
         x, files, labels, devices, _ = val_batch
-        y_hat = self.forward(x)
+        y_hat = self.forward(x, devices)
 
         # Compute loss per sample
         samples_loss = F.cross_entropy(y_hat, labels, reduction="none")
@@ -249,7 +250,7 @@ class PLModule(pl.LightningModule):
         x = self.mel_forward(x)
         x = x.half()
 
-        y_hat = self.model(x)
+        y_hat = self.model(x, devices)
         samples_loss = F.cross_entropy(y_hat, labels, reduction="none")
 
         _, preds = torch.max(y_hat, dim=1)
@@ -383,11 +384,11 @@ def train(config):
     pl_module = PLModule(config)
 
     # Compute model complexity (MACs, parameters) and log to W&B
-    sample = next(iter(test_dl))[0][0].unsqueeze(0)  # Single sample
-    shape = pl_module.mel_forward(sample).size()
-    macs, params_bytes = complexity.get_torch_macs_memory(pl_module.model, input_size=shape)
-    wandb_logger.experiment.config["MACs"] = macs
-    wandb_logger.experiment.config["Parameters_Bytes"] = params_bytes
+    # sample = next(iter(test_dl))[0][0].unsqueeze(0)  # Single sample
+    # shape = pl_module.mel_forward(sample).size()
+    # macs, params_bytes = complexity.get_torch_macs_memory(pl_module.model, input_size=shape)
+    # wandb_logger.experiment.config["MACs"] = macs
+    # wandb_logger.experiment.config["Parameters_Bytes"] = params_bytes
 
     # create the pytorch lightening trainer
     trainer = pl.Trainer(max_epochs=config.n_epochs,
@@ -428,6 +429,7 @@ if __name__ == '__main__':
     parser.add_argument("--base_channels", type=int, default=32)
     parser.add_argument("--channels_multiplier", type=float, default=1.8)
     parser.add_argument("--expansion_rate", type=float, default=2.1)
+    parser.add_argument("--num_devices", type = int, default=6)
 
     # Training hyperparameters
     parser.add_argument("--n_epochs", type=int, default=150)

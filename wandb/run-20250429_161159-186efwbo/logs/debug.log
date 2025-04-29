@@ -1,0 +1,23 @@
+2025-04-29 16:11:59,478 INFO    MainThread:12276 [wandb_setup.py:_flush():67] Current SDK version is 0.19.8
+2025-04-29 16:11:59,478 INFO    MainThread:12276 [wandb_setup.py:_flush():67] Configure stats pid to 12276
+2025-04-29 16:11:59,478 INFO    MainThread:12276 [wandb_setup.py:_flush():67] Loading settings from C:\Users\annas\.config\wandb\settings
+2025-04-29 16:11:59,478 INFO    MainThread:12276 [wandb_setup.py:_flush():67] Loading settings from C:\Users\annas\Desktop\audio_challange\baseline\dcase2025_task1_baseline-1\wandb\settings
+2025-04-29 16:11:59,478 INFO    MainThread:12276 [wandb_setup.py:_flush():67] Loading settings from environment variables
+2025-04-29 16:11:59,478 INFO    MainThread:12276 [wandb_init.py:setup_run_log_directory():647] Logging user logs to .\wandb\run-20250429_161159-186efwbo\logs\debug.log
+2025-04-29 16:11:59,479 INFO    MainThread:12276 [wandb_init.py:setup_run_log_directory():648] Logging internal logs to .\wandb\run-20250429_161159-186efwbo\logs\debug-internal.log
+2025-04-29 16:11:59,479 INFO    MainThread:12276 [wandb_init.py:init():761] calling init triggers
+2025-04-29 16:11:59,479 INFO    MainThread:12276 [wandb_init.py:init():766] wandb.init called with sweep_config: {}
+config: {'project_name': 'DCASE25_Task1', 'experiment_name': 'Baseline_general', 'num_workers': 8, 'precision': '32', 'check_val_every_n_epoch': 10, 'orig_sample_rate': 44100, 'subset': 25, 'n_classes': 10, 'in_channels': 1, 'base_channels': 32, 'channels_multiplier': 1.8, 'expansion_rate': 2.1, 'num_devices': 6, 'n_epochs': 150, 'batch_size': 256, 'mixstyle_p': 0.4, 'mixstyle_alpha': 0.3, 'weight_decay': 0.0001, 'roll_sec': 0.1, 'lr': 0.005, 'warmup_steps': 2000, 'sample_rate': 32000, 'window_length': 3072, 'hop_length': 500, 'n_fft': 4096, 'n_mels': 256, 'freqm': 48, 'timem': 0, 'f_min': 0, 'f_max': None, '_wandb': {}}
+2025-04-29 16:11:59,479 INFO    MainThread:12276 [wandb_init.py:init():784] starting backend
+2025-04-29 16:11:59,480 INFO    MainThread:12276 [wandb_init.py:init():788] sending inform_init request
+2025-04-29 16:11:59,527 INFO    MainThread:12276 [backend.py:_multiprocessing_setup():101] multiprocessing start_methods=spawn, using: spawn
+2025-04-29 16:11:59,527 INFO    MainThread:12276 [wandb_init.py:init():798] backend started and connected
+2025-04-29 16:11:59,529 INFO    MainThread:12276 [wandb_init.py:init():891] updated telemetry
+2025-04-29 16:11:59,566 INFO    MainThread:12276 [wandb_init.py:init():915] communicating run to backend with 90.0 second timeout
+2025-04-29 16:12:00,434 INFO    MainThread:12276 [wandb_init.py:init():990] starting run threads in backend
+2025-04-29 16:12:01,030 INFO    MainThread:12276 [wandb_run.py:_console_start():2375] atexit reg
+2025-04-29 16:12:01,030 INFO    MainThread:12276 [wandb_run.py:_redirect():2227] redirect: wrap_raw
+2025-04-29 16:12:01,030 INFO    MainThread:12276 [wandb_run.py:_redirect():2292] Wrapping output streams.
+2025-04-29 16:12:01,030 INFO    MainThread:12276 [wandb_run.py:_redirect():2315] Redirects installed.
+2025-04-29 16:12:01,037 INFO    MainThread:12276 [wandb_init.py:init():1032] run started, returning control to user process
+2025-04-29 16:14:35,301 INFO    MsgRouterThr:12276 [mailbox.py:close():129] Closing mailbox, abandoning 1 handles.
