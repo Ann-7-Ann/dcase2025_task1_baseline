@@ -30,31 +30,52 @@ class CondBatchNorm2d(nn.Module):
         self.weight = nn.Parameter(torch.ones(num_devices, num_features, 1, 1))
         self.bias = nn.Parameter(torch.zeros(num_devices, num_features, 1, 1))
 
-    def forward(self, x, device_ids):
-        # device_ids should be a tensor of shape (batch_size,)
-        enocoded_ids = {'a': 0, 'b': 1, 'c': 2, 's1':3, 's2': 4, 's3': 5}
-        device_ids = torch.tensor([enocoded_ids[id] for id in device_ids], dtype=torch.long, device=x.device)
-        batch_size = x.size(0)
-        assert device_ids.size(0) == batch_size, "device_ids must match the batch size"
+        # Register buffers for running stats
+        self.register_buffer("running_mean", torch.zeros(num_devices, num_features))
+        self.register_buffer("running_var", torch.ones(num_devices, num_features))
+        self.register_buffer("num_batches_tracked", torch.zeros(num_devices, dtype=torch.long))
 
-        # Initialize output tensor
-        output = torch.zeros_like(x)
+    def forward(self, x, device_id):
+        # device_id: string or index (single batch, single device)
+        print(device_id[0])
+        device_id = device_id[0]
+        if isinstance(device_id, str):
+            device_id = self._encode_id(device_id)
+        if isinstance(device_id, torch.Tensor):
+            device_id = device_id.item()
 
-        # Loop through each sample in the batch and apply conditional normalization
-        for i in range(batch_size):
-            device_id = device_ids[i].item()  # Get device ID for the current sample
-            weight = self.weight[device_id]  # Get the weight for the current device
-            bias = self.bias[device_id]      # Get the bias for the current device
+        weight = self.weight[device_id]
+        bias = self.bias[device_id]
 
-            # Calculate the mean and variance for batch normalization
-            mean = x[i].mean(dim=[1, 2], keepdim=True)
-            var = x[i].var(dim=[1, 2], keepdim=True)
+        if self.training:
+            # Compute batch stats
+            mean = x.mean(dim=[0, 2, 3])  # Shape: (C,)
+            var = x.var(dim=[0, 2, 3], unbiased=False)  # Shape: (C,)
 
-            # Apply normalization for the current sample
-            x_normalized = (x[i] - mean) / torch.sqrt(var + self.eps)
-            output[i] = weight * x_normalized + bias  # Apply scaling and shifting
+            # Update running stats
+            self.running_mean[device_id] = (
+                (1 - self.momentum) * self.running_mean[device_id] + self.momentum * mean
+            )
+            self.running_var[device_id] = (
+                (1 - self.momentum) * self.running_var[device_id] + self.momentum * var
+            )
+            self.num_batches_tracked[device_id] += 1
+        else:
+            mean = self.running_mean[device_id]
+            var = self.running_var[device_id]
 
-        return output
+        # Normalize
+        mean = mean.view(1, -1, 1, 1)
+        var = var.view(1, -1, 1, 1)
+        weight = weight.view(1, -1, 1, 1)
+        bias = bias.view(1, -1, 1, 1)
+
+        x_normalized = (x - mean) / torch.sqrt(var + self.eps)
+        return weight * x_normalized + bias
+
+    def _encode_id(self, id_str):
+        lookup = {'a': 0, 'b': 1, 'c': 2, 's1': 3, 's2': 4, 's3': 5}
+        return lookup[id_str]
 
 class Conv2dNormActivationCond(nn.Module):
     def __init__(self, in_channels, out_channels, kernel_size, stride, padding=0, groups=1, norm_layer=None, activation_layer=nn.ReLU, inplace=True, num_devices=6):
