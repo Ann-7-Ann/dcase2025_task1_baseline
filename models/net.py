@@ -37,7 +37,7 @@ class CondBatchNorm2d(nn.Module):
 
     def forward(self, x, device_id):
         # device_id: string or index (single batch, single device)
-        print(device_id[0])
+        #print(device_id[0])
         device_id = device_id[0]
         if isinstance(device_id, str):
             device_id = self._encode_id(device_id)
