@@ -1,6 +1,7 @@
 import torch
 import torch.nn as nn
 from torchvision.ops.misc import Conv2dNormActivation
+from collections import Counter
 
 from models.helpers.utils import make_divisible
 
@@ -38,11 +39,12 @@ class CondBatchNorm2d(nn.Module):
     def forward(self, x, device_id):
         # device_id: string or index (single batch, single device)
         #print(device_id[0])
-        device_id = device_id[0]
+        device_id = list(device_id)
+        counter = Counter(device_id)
+        device_id = counter.most_common(1)[0][0]  # Get the most
         if isinstance(device_id, str):
             device_id = self._encode_id(device_id)
-        if isinstance(device_id, torch.Tensor):
-            device_id = device_id.item()
+
 
         weight = self.weight[device_id]
         bias = self.bias[device_id]
