@@ -19,7 +19,7 @@ def initialize_weights(m):
             nn.init.zeros_(m.bias)
 
 class CondBatchNorm2d(nn.Module):
-    def __init__(self, num_features, num_devices, eps=1e-5, momentum=0.1):
+    def __init__(self, num_features, num_devices=7, eps=1e-5, momentum=0.1):
         super(CondBatchNorm2d, self).__init__()
         self.num_features = num_features
         self.num_devices = num_devices
@@ -74,11 +74,11 @@ class CondBatchNorm2d(nn.Module):
         return weight * x_normalized + bias
 
     def _encode_id(self, id_str):
-        lookup = {'a': 0, 'b': 1, 'c': 2, 's1': 3, 's2': 4, 's3': 5}
+        lookup = {'a': 0, 'b': 1, 'c': 2, 's1': 3, 's2': 4, 's3': 5, 's4':6, 's5':6, 's6': 6}
         return lookup[id_str]
 
 class Conv2dNormActivationCond(nn.Module):
-    def __init__(self, in_channels, out_channels, kernel_size, stride, padding=0, groups=1, norm_layer=None, activation_layer=nn.ReLU, inplace=True, num_devices=6):
+    def __init__(self, in_channels, out_channels, kernel_size, stride, padding=0, groups=1, norm_layer=None, activation_layer=nn.ReLU, inplace=True, num_devices=7):
         super().__init__()
         self.conv = nn.Conv2d(in_channels, out_channels, kernel_size, stride, padding, groups=groups, bias=False)
         if norm_layer is not None:
@@ -321,7 +321,7 @@ class Network(nn.Module):
 
 
 def get_model(n_classes=10, in_channels=1, base_channels=32, channels_multiplier=2.3, expansion_rate=3.0,
-              n_blocks=(3, 2, 1), strides=None, num_devices= 9):
+              n_blocks=(3, 2, 1), strides=None, num_devices= 7):
     """
     @param n_classes: number of the classes to predict
     @param in_channels: input channels to the network, for audio it is by default 1
